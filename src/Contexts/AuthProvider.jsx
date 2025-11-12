@@ -10,7 +10,7 @@ const AuthProvider = ({children}) => {
 const provider = new GoogleAuthProvider();
 
 
-    const createUser=(email,password)=>{
+    const createUser=(auth,email,password)=>{
         return createUserWithEmailAndPassword(auth,email,password)
     }
 
@@ -25,12 +25,11 @@ const provider = new GoogleAuthProvider();
         return signInWithPopup(auth,provider);
     }
    
-
-   useEffect(()=>{
+ useEffect(()=>{
     const unSubscribe=onAuthStateChanged(auth,(currentUser)=>{
         console.log("Current user in auth state ",currentUser)
-        setUser(currentUser)
-        console.log()
+       setUser(currentUser)
+        
         setLoading(false)
 
     })
@@ -38,6 +37,7 @@ const provider = new GoogleAuthProvider();
         unSubscribe();
     }
    },[])
+   
 
 
 

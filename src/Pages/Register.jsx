@@ -7,6 +7,7 @@ import { AuthContext } from '../Contexts/Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
+import { auth } from '../Firebase/firebase.init';
 
 
 
@@ -16,7 +17,7 @@ const Register = () => {
    
     
 // const [user , setUser]=useState(null);
-const [error, setError]=useState(null);
+const [error, setError]=useState("");
 // const [success,setSuccess]=useState(false);
 const [showpass, setShowpass]=useState(false)
 
@@ -33,7 +34,7 @@ const handleRegister=(event)=>{
     toast.success(error)
     return ;
 }
- createUser(email,password)
+ createUser(auth, email,password)
  .then(result=>{console.log(result.user)
 toast.success(' Account created successfully!');}
 )
@@ -52,7 +53,7 @@ toast.success(' Account created successfully!');}
 // })
 
 
-toast.success(`${error}`);
+
 return
 
 }

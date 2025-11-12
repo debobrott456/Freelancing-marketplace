@@ -12,7 +12,7 @@ const Login = () => {
  const navigate=useNavigate()
  const location=useLocation()
  const emailref=useRef()
-    const {signInUser,signInWithGoogle}=use(AuthContext)
+const {signInUser,signInWithGoogle}=use(AuthContext)
    
 
 const handleLogin=(event)=>{
@@ -32,7 +32,7 @@ setTimeout(() => navigate(location.state || '/'), 1000);
 
 )
     .catch(error=>{console.log(error)
-            toast.success(error.message);
+            
         
     })
    

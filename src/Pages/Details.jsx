@@ -30,7 +30,7 @@ const Details = () => {
  
     return (
         <div>
-          <div className='mx-20 max-w-150 rounded-2xl p-5 bg-white shadow-2xl m-10' ><p className='mb-3 text-orange-300'>title:{job.title}</p>
+          <div className='mx-20 max-w-150 rounded-2xl p-5 bg-white shadow-2xl m-10' ><p className='mb-3 text-orange-300 text-center'>title:{job.title}</p>
             <img src={job.coverImage} alt="" style={{width:500 ,height:400}} className='rounded-2xl'/>
             <p className='p-5'>posted By :{job.postedBy}</p>
             <p className='p-5 text-red-300'>category: {job.category}</p>

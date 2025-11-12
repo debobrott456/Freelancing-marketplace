@@ -86,8 +86,8 @@ signOutUser()
 
         <nav className="navbar bg-base-100 shadow-sm">
    <div className="navbar-start">
-    <img src="https://images-platform.99static.com/3-Gw3-XKAjke2wz61jujQkx8dUs=/378x266:1622x1510/fit-in/99designs-contests-attachments/138/138432/attachment_138432570" alt="" style={{width:40}}/>
-    <a className="btn btn-ghost  md:text-xl">ToyZen</a>
+<img src="https://tse4.mm.bing.net/th/id/OIP.nrDNLabCOPqgNfSCUsB89wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" style={{width:50}}/>
+    <a className="btn btn-ghost  md:text-xl">F-Service</a>
   </div>
 
   <div className="navbar-center">
