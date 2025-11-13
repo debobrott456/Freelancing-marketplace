@@ -84,9 +84,9 @@ signOutUser()
     return (
        
 
-        <nav className="navbar bg-base-100 shadow-sm">
+        <nav className="navbar bg-base-100 shadow-sm ">
    <div className="navbar-start">
-<img src="https://tse4.mm.bing.net/th/id/OIP.nrDNLabCOPqgNfSCUsB89wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" style={{width:50}}/>
+<img src="https://tse4.mm.bing.net/th/id/OIP.nrDNLabCOPqgNfSCUsB89wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="" style={{width:40}}/>
     <a className="btn btn-ghost  md:text-xl">F-Service</a>
   </div>
 

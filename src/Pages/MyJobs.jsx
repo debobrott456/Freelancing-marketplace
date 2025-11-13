@@ -33,7 +33,12 @@ fetch(`http://localhost:5000/allJobs/${_id}`,{
     method:'DELETE'
 })
 .then(res=>res.json())
-.then(data=>console.log(data))
+.then(data=>{console.log(data)
+if(data.deletedCount){
+const remainingJobs=jobs.filter(job=>job._id!=_id)
+setJobs(remainingJobs)
+}}
+)
 
 
     Swal.fire({

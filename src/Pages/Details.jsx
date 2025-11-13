@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router';
-
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Details = () => {
-
- 
-   const { id } = useParams(); // get id from URL
+  const { id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
+ 
 
   useEffect(() => {
     fetch(`http://localhost:5000/allJobs/${id}`)
       .then((res) => res.json())
-      .then((data) => {
-        // since your API returns an array (because of toArray()), take first element
-        setJob(data);
+      .then((data) => {console.log(data)
+        // if your API returns an array (from toArray())
+        setJob(data[0] || data);
         setLoading(false);
       })
       .catch((err) => {
@@ -22,24 +22,50 @@ const Details = () => {
         setLoading(false);
       });
   }, [id]);
-  console.log(job)
+
+  const handleAccept = () => {
+    
+    if (!job) return;
+
+    // Get old accepted jobs from localStorage
+    const stored = JSON.parse(localStorage.getItem("acceptedTasks")) || [];
+
+    // Check if already accepted
+    const exists = stored.find((item) => item._id === job._id);
+    if (exists) {
+      toast.success("You already accepted this task!");
+      return;
+    }
+
+    // Save new one
+    stored.push(job);
+    localStorage.setItem("acceptedTasks", JSON.stringify(stored));
+
+     toast.success('job has accepted successful!'); 
+    
+  };
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (!job) return <p className="text-center mt-10">Job not found.</p>;
 
- 
-    return (
-        <div>
-          <div className='mx-20 max-w-150 rounded-2xl p-5 bg-white shadow-2xl m-10' ><p className='mb-3 text-orange-300 text-center'>title:{job.title}</p>
-            <img src={job.coverImage} alt="" style={{width:500 ,height:400}} className='rounded-2xl'/>
-            <p className='p-5'>posted By :{job.postedBy}</p>
-            <p className='p-5 text-red-300'>category: {job.category}</p>
-            <p className='p-5'>email: {job.userEmail}</p>
-            <p className='p-5'>summary: {job.summary}</p>
-             <button className="btn btn-outline btn-primary mt-4">accept task</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className="mx-20 max-w-150 rounded-2xl p-5 bg-white shadow-2xl m-10">
+      <p className="mb-3 text-orange-300 text-center">Title: {job.title}</p>
+      <img
+        src={job.coverImage}
+        alt=""
+        style={{ width: 500, height: 400 }}
+        className="rounded-2xl"
+      />
+      <p className="p-5">Posted By: {job.postedBy}</p>
+      <p className="p-5 text-red-300">Category: {job.category}</p>
+      <p className="p-5">Email: {job.userEmail}</p>
+      <p className="p-5">Summary: {job.summary}</p>
+      <button onClick={handleAccept} className="btn btn-outline btn-primary mt-4">
+        Accept Task
+      </button><ToastContainer/>
+    </div>
+  );
 };
 
 export default Details;

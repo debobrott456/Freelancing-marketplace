@@ -1,7 +1,9 @@
-import React from 'react';
-
+import React, { use } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../Contexts/Context';
 const AddJobs = () => {
-
+const {user}=use(AuthContext);
     const handleInput=(e)=>{
     e.preventDefault();
     
@@ -23,7 +25,9 @@ const AddJobs = () => {
         body:JSON.stringify(obj)
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))
+    .then(data=>{console.log(data)
+     toast.success('Job added successful!'); }
+)
     e.target.reset()
      
     }
@@ -45,13 +49,13 @@ const AddJobs = () => {
                 <label className="label font-semibold">CoverImage</label> <br />
                 <input type="text" placeholder="Type here" name="coverImage" className="input w-full" /> <br />
                 <label className="label font-semibold">Email</label> <br />
-                <input type="email" placeholder="Type here" name="email" className="input w-full" /> <br />
+                <input type="email" placeholder="Type here" name="email" defaultValue={user.email} className="input w-full" /> <br />
                 <label className="label font-semibold">Date</label> <br />
                 
                 <input type="date" name="date" className="input w-full" />
                 <button className="btn btn-outline btn-primary mt-4"><input type="submit" value="submit" /></button>
                 </fieldset>
-            </form>
+            </form><ToastContainer/>
         </div>
     );
 };

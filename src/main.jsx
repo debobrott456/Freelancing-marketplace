@@ -57,12 +57,13 @@ const router=createBrowserRouter(
       },
       {
         path:"/accepted",
+        loader:()=> fetch('/http://localhost:5000/allJobs/:id'),
         element:<PrivateRoutes><AcceptedTask></AcceptedTask></PrivateRoutes>
       },
       {
         path: "/myjobs",
        
-        element:<MyJobs></MyJobs>
+        element:<PrivateRoutes><MyJobs></MyJobs></PrivateRoutes>
       },
       {
         path:"/update/:id",

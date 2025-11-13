@@ -1,7 +1,9 @@
 import React, { use, useEffect, useState } from 'react';
 
 import { AuthContext } from '../Contexts/Context';
-
+import { toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Update = () => {
  const {user }=use(AuthContext)
@@ -37,7 +39,8 @@ const Update = () => {
         body:JSON.stringify(obj)
     })
     .then(res=>res.json())
-    .then(data=>console.log(data))})}
+    .then(data=>{console.log(data)
+     toast.success('Job updated successful!');} )})}
    
     e.target.reset()
      
@@ -45,21 +48,21 @@ const Update = () => {
 
     return (
         <div>
-            <form onSubmit={handleUpdate} action=""><div className="hero bg-base-200 min-h-screen">
+            <form onSubmit={handleUpdate} action="">{jobs.map(job=>(<div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
 
     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
       <div className="card-body">
     <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
                 <label className="label  font-semibold">Title</label> <br />
-                <input type="text" placeholder="Type here" name="title" className="input" /> <br />
+                <input type="text" placeholder="Type here" name="title" defaultValue={job.title} className="input" /> <br />
 
                     <label className="label font-semibold">Category</label> <br />
-                <input type="text" placeholder="Type here" name="category" className="input" /> <br />
-                <label className="label font-semibold">Summury</label> <br />
-                <input type="text" placeholder="Type here" name="summury" className="input" /> <br />
+                <input type="text" placeholder="Type here" name="category" defaultValue={job.category} className="input" /> <br />
+                <label className="label font-semibold">Summury</label> <br /> 
+                <input type="text" placeholder="Type here" name="summury" defaultValue={job.summury} className="input" /> <br />
                 <label className="label font-semibold">CoverImage</label> <br />
-                <input type="text" placeholder="Type here" name="coverImage" className="input" /> <br />
+                <input type="text" placeholder="Type here" name="coverImage" defaultValue={job.coverImage} className="input" /> <br />
                
            
                 
@@ -70,7 +73,7 @@ const Update = () => {
      </div>
     </div>
   </div>
-</div></form>
+</div>))}</form><ToastContainer/>
         </div>
     );
 };

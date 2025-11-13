@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
     return (
-      <footer className="   p-10 w-full">
+      <footer className="   p-5 w-full">
  
-<div className=' bg-black text-white mt-1 p-6'>
+<div className=' bg-gray-700 text-white mt-1  p-6'>
   <div className='flex gap-16'><div><h3>Cs-Ticket System</h3><p>
   Ticket a record of a customers issue, request, or question. <br/>
  Customer submits a ticket via email, web form, chat, or phone.<br/>

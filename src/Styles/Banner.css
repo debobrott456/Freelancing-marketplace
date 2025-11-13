@@ -4,9 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(270deg, #823fc9, #b73a6a, #df0c83);
+  background: linear-gradient(270deg, #823fc9, #b96f8b, #df0c83);
   background-size: 600% 600%;
-  animation: gradientAnimation 15s ease infinite;
+  animation: gradientAnimation 10s ease infinite;
   color: white;
   text-align: center;
   position: relative;

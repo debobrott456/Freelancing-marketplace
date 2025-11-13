@@ -40,6 +40,7 @@ setTimeout(() => navigate(location.state || '/'), 1000);
 const handleGoogleLogin=()=>{
 signInWithGoogle()
 .then(result=>{console.log(result.user)
+     toast.success('Log in successful!'); 
     setTimeout(() => navigate(location.state || '/'), 1000);
 })
 .catch(error=>console.log(error))
