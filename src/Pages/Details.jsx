@@ -49,7 +49,7 @@ const Details = () => {
   if (!job) return <p className="text-center mt-10">Job not found.</p>;
 
   return (
-    <div className="mx-20 max-w-150 rounded-2xl p-5 bg-white shadow-2xl m-10">
+    <div className="m-5 md:mx-20 max-w-150 rounded-2xl p-5 bg-white shadow-2xl ">
       <p className="mb-3 text-orange-300 text-center">Title: {job.title}</p>
       <img
         src={job.coverImage}

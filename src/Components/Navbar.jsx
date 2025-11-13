@@ -97,8 +97,8 @@ signOutUser()
     <a className="btn btn-ghost  md:text-xl">F-Service</a>
   </div>
 
-  <div className="navbar-center">
-    <ul className="menu menu-horizontal px-1">
+  <div className="navbar-center ">
+    <ul className="menu menu-horizontal px-1 flex flex-col md:flex-row">
       {links}
     </ul>
   </div>

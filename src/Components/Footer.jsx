@@ -5,7 +5,7 @@ const Footer = () => {
       <footer className="   p-5 w-full">
  
 <div className=' bg-gray-700 text-white mt-1  p-6'>
-  <div className='flex gap-16'><div><h3>Cs-Ticket System</h3><p>
+  <div className='flex flex-col md:flex-row gap-16'><div><h3>Cs-Ticket System</h3><p>
   Ticket a record of a customers issue, request, or question. <br/>
  Customer submits a ticket via email, web form, chat, or phone.<br/>
  System assigns the ticket a unique ID and categorizes it priority.

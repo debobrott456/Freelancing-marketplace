@@ -51,13 +51,13 @@ const Update = () => {
   if (!job) return <p>Loading job...</p>;
 
   return (
-    <div>
+    <div className='w-full' >
       <form onSubmit={handleUpdate}>
-        <div className="hero bg-base-200 min-h-screen">
-          <div className="hero-content flex-col lg:flex-row-reverse">
-            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+        <div className="hero bg-base-200 ">
+          <div className="hero-content flex-col ">
+            <div className="card bg-base-100 w-full  shadow-2xl">
               <div className="card-body flex justify-center items-center">
-                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box  border p-1 w-full md:p-4">
                   <label className="label font-semibold">Title</label>
                   <input
                     type="text"
@@ -81,7 +81,7 @@ const Update = () => {
                     type="text"
                     placeholder="Type here"
                     name="summury"
-                    defaultValue={job.summury || job.summary} // fallback if your field is null
+                    defaultValue={job.summury || job.summary} 
                     className="input"
                   />
 

@@ -32,12 +32,12 @@ const {user}=use(AuthContext);
      
     }
     return (
-        <div className='flex flex-col justify-center items-center m-10 '>
+        <div className='flex flex-col justify-center items-center m-3 md:m-10 '>
               <p style={{ color: "orange", fontStyle: "italic" }} className='m-5'>
         Please fill in the job details carefully. Include a clear title, job description,<br />
         and expected budget so freelancers can understand your needs easily.
       </p>
-            <form  onSubmit={handleInput} action=""><fieldset className="fieldset w-[600px] bg-white shadow-2xl border-base-300 rounded-box  border p-4">
+            <form  onSubmit={handleInput} action=""><fieldset className="fieldset w-full md:w-[600px] bg-white shadow-2xl border-base-300 rounded-box  border p-4">
                 <label className="label  font-semibold">Title</label> <br />
                 <input type="text" placeholder="Type here" name="title" className="input w-full" /> <br />
                 <label className="label font-semibold">PostedBy</label> <br />
