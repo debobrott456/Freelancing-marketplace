@@ -14,7 +14,7 @@ const Details = () => {
       .then((res) => res.json())
       .then((data) => {console.log(data)
         // if your API returns an array (from toArray())
-        setJob(data[0] || data);
+        setJob( data);
         setLoading(false);
       })
       .catch((err) => {

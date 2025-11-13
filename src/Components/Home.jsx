@@ -59,7 +59,7 @@ const Home = () => {
             <p>posted By :{job.postedBy}</p>
             <p>category: {job.category}</p>
             <p>email: {job.userEmail}</p>
-            <button className="btn btn-outline btn-primary mt-4">accept task</button>
+            
             </div>)) }
         </div></div>
  </div>
