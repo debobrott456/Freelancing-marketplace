@@ -4,7 +4,7 @@ import "../Styles/Banner.css"
 
 const Home = () => {
     const jobs=useLoaderData();
-    console.log(jobs)
+   
     return (
     
  <div> 

@@ -10,6 +10,11 @@ import { AuthContext } from '../Contexts/Context';
 const Navbar = () => {
    const [isHovered, setIsHovered] = useState(false);
 const {user,signOutUser}=use(AuthContext);
+const handleTheme=(checked)=>{const html=document.querySelector('html')
+  if(checked) {html.setAttribute("data-theme","dark")}
+    else {html.setAttribute("data-theme","light")}
+}
+
 const handleSignOut=()=>{
 signOutUser()
 .then(result=>console.log(result.user))
@@ -79,6 +84,8 @@ signOutUser()
       >
         Accepted Task
       </NavLink></li>
+      <input onChange={(e)=>handleTheme(e.target.checked)}
+      type="checkbox" defaultChecked={localStorage.getItem('theme')==="dark"} className='toggle' />
     </>}
    </>
     return (

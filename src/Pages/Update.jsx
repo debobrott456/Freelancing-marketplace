@@ -1,86 +1,111 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 
 import { AuthContext } from '../Contexts/Context';
-import { toast } from 'react-toastify';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router';
 
 const Update = () => {
- const {user }=use(AuthContext)
-    const [jobs,setJobs]=useState([])
- 
-    
-    useEffect(()=>{
-        if(user?.email){
-   fetch(`http://localhost:5000/allJobs?email=${user.email}`)
-   .then(res=>res.json())
-   .then(data=>{console.log(data)
-   setJobs(data)}
-)}
+  const { id } = useParams(); // Get job._id from URL
 
-    },[user?.email])
+  const [job, setJob] = useState(null); // single job
 
-
-  console.log(jobs)
-
-  
- const handleUpdate=(e)=>{
-    e.preventDefault();
-    
-    const title=e.target.title.value;
- 
-    const category=e.target.category.value;
-    const summury=e.target.summury.value;
-    const coverImage=e.target.coverImage.value;
-
-    const obj={title,category,summury,coverImage}
-    console.log(obj)
-{jobs.map(job=>{ fetch(`http://localhost:5000/allJobs/${job._id}`,{
-        method:'PATCH',
-        headers: {
-            'content-type':'application/json'
-        },
-        body:JSON.stringify(obj)
-    })
-    .then(res=>res.json())
-    .then(data=>{console.log(data) ;
-       console.log(job._id)
-    ;} )})} toast.success('Job updated successful!')
-   
-    e.target.reset()
-     
+  // Fetch the job by ID
+  useEffect(() => {
+    if (id) {
+      fetch(`http://localhost:5000/allJobs/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          setJob(data); // your GET by ID returns an array
+        })
+        .catch(err => console.error(err));
     }
+  }, [id]);
 
-    return (
-        <div>
-            <form onSubmit={handleUpdate} action=""><div className="hero bg-base-200 min-h-screen ">
-  <div className="hero-content flex-col lg:flex-row-reverse">
+  const handleUpdate = (e) => {
+    e.preventDefault();
 
-    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <div className="card-body flex justify-center items-center">
-    <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-                <label className="label  font-semibold">Title</label> <br />
-                <input type="text" placeholder="Type here" name="title" defaultValue={jobs.title} className="input" /> <br />
+    const title = e.target.title.value;
+    const category = e.target.category.value;
+    const summury = e.target.summury.value;
+    const coverImage = e.target.coverImage.value;
 
-                    <label className="label font-semibold">Category</label> <br />
-                <input type="text" placeholder="Type here" name="category" defaultValue={jobs.category} className="input" /> <br />
-                <label className="label font-semibold">Summury</label> <br /> 
-                <input type="text" placeholder="Type here" name="summury" defaultValue={jobs.summury} className="input" /> <br />
-                <label className="label font-semibold">CoverImage</label> <br />
-                <input type="text" placeholder="Type here" name="coverImage" defaultValue={jobs.coverImage} className="input" /> <br />
-               
-           
-                
-                
-                <button className="btn btn-outline btn-primary mt-4"><input type="submit" value="update" /></button>
+    const obj = { title, category, summury, coverImage };
+
+    fetch(`http://localhost:5000/allJobs/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(obj)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        toast.success('Job updated successfully!');
+      })
+      .catch(err => {
+        console.error(err);
+        toast.error('Update failed');
+      });
+  };
+
+  if (!job) return <p>Loading job...</p>;
+
+  return (
+    <div>
+      <form onSubmit={handleUpdate}>
+        <div className="hero bg-base-200 min-h-screen">
+          <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+              <div className="card-body flex justify-center items-center">
+                <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+                  <label className="label font-semibold">Title</label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    name="title"
+                    defaultValue={job.title}
+                    className="input"
+                  />
+
+                  <label className="label font-semibold">Category</label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    name="category"
+                    defaultValue={job.category}
+                    className="input"
+                  />
+
+                  <label className="label font-semibold">Summury</label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    name="summury"
+                    defaultValue={job.summury || job.summary} // fallback if your field is null
+                    className="input"
+                  />
+
+                  <label className="label font-semibold">CoverImage</label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    name="coverImage"
+                    defaultValue={job.coverImage}
+                    className="input"
+                  />
+
+                  <button className="btn btn-outline btn-primary mt-4" type="submit">
+                    Update
+                  </button>
                 </fieldset>
-            
-     </div>
-    </div>
-  </div>
-</div></form><ToastContainer/>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      </form>
+      <ToastContainer />
+    </div>
+  );
 };
 
 export default Update;
