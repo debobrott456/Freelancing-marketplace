@@ -2,7 +2,7 @@
 import React, { use, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, Navigate } from 'react-router';
-// import { auth } from '../Firebase/firebase.init';
+
 import { AuthContext } from '../Contexts/Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
