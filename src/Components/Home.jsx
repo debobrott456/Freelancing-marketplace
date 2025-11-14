@@ -48,7 +48,7 @@ const Home = () => {
       <Link to="/allJobs?category=Digital Marketing"><div className='feature w-60 p-5 '><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1115" alt=""  style={{width:50, height:50}}/>
       <p>Digital Marketing</p><GoMoveToEnd/></div></Link>
       <Link to="/allJobs?category=Graphics Designing"> <div className='feature w-60 p-5 '><img src="https://images.unsplash.com/photo-1509966756634-9c23dd6e6815?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=776" alt="" style={{width:50, height:50}} />
-      <p>Graphics Design</p><GoMoveToEnd/></div></Link>
+      <p>Graphics Designing</p><GoMoveToEnd/></div></Link>
      
      
     </div>
