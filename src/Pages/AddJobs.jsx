@@ -13,9 +13,9 @@ const {user}=use(AuthContext);
     const summury=e.target.summury.value;
     const coverImage=e.target.coverImage.value;
     const userEmail=e.target.email.value;
-    const date=e.target.date.value;
+   const created_At = new Date()
 
-    const obj={title,postedBy,category,summury,coverImage,userEmail,date}
+    const obj={title,postedBy,category,summury,coverImage,userEmail,created_At}
 
     fetch('http://localhost:5000/addJobs',{
         method:'POST',
@@ -50,9 +50,7 @@ const {user}=use(AuthContext);
                 <input type="text" placeholder="Type here" name="coverImage" className="input w-full" /> <br />
                 <label className="label font-semibold">Email</label> <br />
                 <input type="email" placeholder="Type here" name="email" defaultValue={user.email} className="input w-full" /> <br />
-                <label className="label font-semibold">Date</label> <br />
-                
-                <input type="date" name="date" className="input w-full" />
+
                 <button className="btn btn-outline btn-primary mt-4"><input type="submit" value="submit" /></button>
                 </fieldset>
             </form><ToastContainer/>

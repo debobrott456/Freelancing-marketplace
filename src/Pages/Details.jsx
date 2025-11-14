@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from "../Contexts/Context";
 
 const Details = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
- 
+ const {user}=use(AuthContext)
 
   useEffect(() => {
     fetch(`http://localhost:5000/allJobs/${id}`)
@@ -61,9 +62,10 @@ const Details = () => {
       <p className="p-5 text-red-300">Category: {job.category}</p>
       <p className="p-5">Email: {job.userEmail}</p>
       <p className="p-5">Summary: {job.summary}</p>
-      <button onClick={handleAccept} className="btn btn-outline btn-primary mt-4">
+    {job.userEmail!=user.email?<button onClick={handleAccept} className="btn btn-outline btn-primary mt-4">
         Accept Task
-      </button><ToastContainer/>
+      </button>:<button className="btn btn-outline">Thanks</button>}  
+      <ToastContainer/>
     </div>
   );
 };

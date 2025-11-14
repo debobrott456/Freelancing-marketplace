@@ -1,10 +1,11 @@
 import React from 'react';
-import { useLoaderData } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import "../Styles/Banner.css"
+import { GoMoveToEnd } from "react-icons/go";
 
 const Home = () => {
     const jobs=useLoaderData();
-   
+   console.log(jobs)
     return (
     
  <div> 
@@ -39,18 +40,17 @@ const Home = () => {
         </div>
       </div>
     </section>
-    <div className='hidden md:block'> <p className='text-center text-3xl'>Top <span className='text-violet-400'>Category</span></p>
-      <div className=' gap-10 m-10 flex-col  md:flex-row'>
-      <div className='w-100 p-5 '><img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="" />
-      <p>Frontend developing</p></div>
-      <div className='w-100 p-5 '><img src="https://images.unsplash.com/photo-1509966756634-9c23dd6e6815?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=776" alt="" />
-      <p>Digital Marketing</p></div>
-      <div className='w-100 p-5 '><img src="https://images.unsplash.com/photo-1519408469771-2586093c3f14?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=702" alt="" />
-      <p>Graphics Design</p></div>
-      <div className='w-100 p-5 '><img src="https://images.unsplash.com/photo-1509966756634-9c23dd6e6815?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=776" alt="" />
-      <p>Full Stack developing</p></div>
-      <div className='w-100 p-5 '><img src="https://images.unsplash.com/photo-1586717799252-bd134ad00e26?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt="" />
-      <p>UI/UX Design</p></div>
+    <div className='hidden md:block md:w-full'> <p className='text-center text-3xl'>Top <span className='text-violet-400'>Category</span></p>
+   <div className="flex flex-col md:flex-row gap-10 m-10">
+     <Link to="/allJobs?category=Web Development"> <div  className='feature w-60 p-5 '><img src="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170" alt=""  style={{width:50, height:50}} />
+      <p>Web Development</p>
+      <GoMoveToEnd/></div></Link>
+      <Link to="/allJobs?category=Digital Marketing"><div className='feature w-60 p-5 '><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1115" alt=""  style={{width:50, height:50}}/>
+      <p>Digital Marketing</p><GoMoveToEnd/></div></Link>
+      <Link to="/allJobs?category=Graphics Designing"> <div className='feature w-60 p-5 '><img src="https://images.unsplash.com/photo-1509966756634-9c23dd6e6815?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=776" alt="" style={{width:50, height:50}} />
+      <p>Graphics Design</p><GoMoveToEnd/></div></Link>
+     
+     
     </div>
     </div>
       <div className='m-5'><p className='text-center font-semibold text-3xl m-5'>Recent <span className='text-violet-500'>Jobs</span></p> <div className='grid grid-cols-1 md:grid-cols-3 gap-10'>
@@ -59,7 +59,7 @@ const Home = () => {
             <p>posted By :{job.postedBy}</p>
             <p>category: {job.category}</p>
             <p>email: {job.userEmail}</p>
-            
+           <Link to={`/details/${job._id}`}>   <button className="btn btn-outline btn-primary mt-4">view details</button></Link>
             </div>)) }
         </div></div>
  </div>

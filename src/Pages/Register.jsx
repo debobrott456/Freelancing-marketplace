@@ -1,7 +1,7 @@
 // import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { use, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, Navigate } from 'react-router';
 // import { auth } from '../Firebase/firebase.init';
 import { AuthContext } from '../Contexts/Context';
 import { ToastContainer } from 'react-toastify';
@@ -18,25 +18,40 @@ const Register = () => {
     
 // const [user , setUser]=useState(null);
 const [error, setError]=useState("");
+const [password,setPassword]=useState("")
 // const [success,setSuccess]=useState(false);
 const [showpass, setShowpass]=useState(false)
 
-const charregex=/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+const handlePasswordChange = (e) => {
+  const value = e.target.value;
+  setPassword(value);
+
+  const charregex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+  if (!charregex.test(value)) {
+    setError("Password must have at least 1 uppercase, 1 lowercase, and be 6+ characters.");
+  } else {
+    setError(""); // clear error when valid
+  }
+};
 
 const handleRegister=(event)=>{
  event.preventDefault();
  const email=event.target.email.value;
  const password=event.target.password.value
 
-  if(!charregex.test(password)){
-    setError('password must consist one uppercase lowercase and must at least 6 character ')
+//   if(!charregex.test(password)){
+//     setError('password must consist one uppercase lowercase and must at least 6 character ')
 
-    toast.success(error)
-    return ;
-}
+//     toast.success(error)
+//     return ;
+// }
+
  createUser(auth, email,password)
  .then(result=>{console.log(result.user)
-toast.success(' Account created successfully!');}
+toast.success(' Account created successfully!');
+ Navigate('/login');
+}
 )
  .catch(error=>{console.log(error)
     toast.success(error.message);
@@ -85,8 +100,18 @@ setShowpass(!showpass);
 
 
  <div className='relative'> <label className="label">Password</label>
-          <input type={showpass?'text':'password'} name="password" className="input" placeholder="Password" required/>
-          <button onClick={handlebutton} type='button' className='absolute top-7 right-3 z-10'>{showpass?<FaEyeSlash/>:<FaEye/>}</button>
+ <input
+    type={showpass ? "text" : "password"}
+    name="password"
+    value={password}
+    onChange={handlePasswordChange}
+    className="input"
+    placeholder="Password"
+    required
+  />          <button onClick={handlebutton} type='button' className='absolute top-7 right-3 z-10'>{showpass?<FaEyeSlash/>:<FaEye/>}</button>
+    {error && (
+    <p className="text-red-500 text-sm mt-1">{error}</p>
+  )}
           </div>
 
      <p>Already have an account <Link className='text-blue-400 underline' to ="/login">Login</Link></p>
