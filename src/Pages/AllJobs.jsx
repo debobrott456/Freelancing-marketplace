@@ -18,8 +18,6 @@ const AllJobs = () => {
     
 // }, [sortOrder]);
 
-//   const term=search.trim().toLocaleLowerCase()
-//   const filtered=term?jobs.filter(app=>app.title.toLocaleLowerCase().includes(term)):jobs
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("desc");
