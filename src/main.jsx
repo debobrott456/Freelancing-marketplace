@@ -19,7 +19,12 @@ import AddJobs from './Pages/AddJobs.jsx';
 import AllJobs from './Pages/AllJobs.jsx';
 import MyJobs from './Pages/MyJobs.jsx';
 import Update from './Pages/Update.jsx';
-
+import FAQ from './Pages/FAQ.jsx';
+import About from './Pages/About.jsx';
+import DashboardLayout from './Pages/DashboardLayout.jsx';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import MyProfile from './Pages/MyProfile.jsx';
+const queryClient=new QueryClient();
 const router=createBrowserRouter(
   [{
  path:"/",
@@ -30,22 +35,19 @@ const router=createBrowserRouter(
         index:true,
         
         path:"/",
-        loader:()=> fetch('http://localhost:5000/recentJobs'),
+        loader:()=> fetch('https://3dserver.vercel.app/recentJobs'),
         element:<Home></Home>
       },
-      {
-        path:"/addJobs",
-        element:<PrivateRoutes><AddJobs></AddJobs></PrivateRoutes>
-      },
+   
       {
         path:"/allJobs",
-         loader:()=> fetch('http://localhost:5000/allJobs'),
+        //  loader:()=> fetch('https://3dserver.vercel.app/allJobs'),
         element:<AllJobs></AllJobs>
       },
       {
         path:"/details/:id",
-        loader:()=> fetch('/http://localhost:5000/allJobs/:id'),
-        element:<PrivateRoutes><Details></Details></PrivateRoutes>
+        loader:()=> fetch('https://3dserver.vercel.app/allJobs/:id'),
+        element:<Details></Details>
       },
       {
         path:"/login",
@@ -55,32 +57,61 @@ const router=createBrowserRouter(
        path:"/register",
        Component:Register
       },
+    
       {
-        path:"/accepted",
-        loader:()=> fetch('/http://localhost:5000/allJobs/:id'),
+       path: "/faq",
+       Component:FAQ
+      },
+      {
+      path : "/about",
+      Component:About
+      },
+ 
+        
+    
+    ]
+  }
+,
+{
+   path:"/dashboard",
+   element:<DashboardLayout></DashboardLayout>,
+
+   children:[
+        {
+        path:"accepted",
+        loader:()=> fetch('https://3dserver.vercel.app/allJobs/:id'),
         element:<PrivateRoutes><AcceptedTask></AcceptedTask></PrivateRoutes>
       },
       {
-        path: "/myjobs",
+        path: "myjobs",
        
         element:<PrivateRoutes><MyJobs></MyJobs></PrivateRoutes>
       },
       {
-        path:"/update/:id",
+        path:"update/:id",
        
         element:<Update></Update>
 
+      },
+      {
+        path:"addJobs",
+        element:<PrivateRoutes><AddJobs></AddJobs></PrivateRoutes>
+      },
+      {
+        path: "profile",
+        element:<MyProfile></MyProfile>
       }
-        
+
+   ]
     
-    ]
-  }]
+  }
+]
 )   
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>  
+       <QueryClientProvider client={queryClient}>  <AuthProvider>  
         <RouterProvider router={router}></RouterProvider>
-</AuthProvider>
-  </StrictMode>,
+</AuthProvider> </QueryClientProvider>
+  </StrictMode>, 
 )

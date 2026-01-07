@@ -1,13 +1,13 @@
 // import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { use, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link, Navigate } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 
 import { AuthContext } from '../Contexts/Context';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
-import { auth } from '../Firebase/firebase.init';
+
 
 
 
@@ -16,17 +16,20 @@ const Register = () => {
    const {createUser,signInWithGoogle}=use(AuthContext);
    
     
-// const [user , setUser]=useState(null);
-const [error, setError]=useState("");
-const [password,setPassword]=useState("")
-// const [success,setSuccess]=useState(false);
+
+const [error, setError]=useState(null);
+const [password, setPassword] = useState("");
+ const navigate=useNavigate()
 const [showpass, setShowpass]=useState(false)
+
+let charregex=/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+
 
 const handlePasswordChange = (e) => {
   const value = e.target.value;
   setPassword(value);
 
-  const charregex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+   charregex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
   if (!charregex.test(value)) {
     setError("Password must have at least 1 uppercase, 1 lowercase, and be 6+ characters.");
@@ -40,36 +43,26 @@ const handleRegister=(event)=>{
  const email=event.target.email.value;
  const password=event.target.password.value
 
-//   if(!charregex.test(password)){
-//     setError('password must consist one uppercase lowercase and must at least 6 character ')
-
-//     toast.success(error)
-//     return ;
-// }
-
- createUser(auth, email,password)
+  if(!charregex.test(password)){
+    setError('password must consist one uppercase lowercase and must at least 6 character ')
+    toast.error(error)
+    return ;
+}
+ createUser(email,password)
  .then(result=>{console.log(result.user)
 toast.success(' Account created successfully!');
- Navigate('/login');
+ setTimeout(() => {
+        navigate( '/');
+      }, 1200);
 }
 )
  .catch(error=>{console.log(error)
-    toast.success(error.message);
+    toast.error(error.message);
 
  })
 
-// createUserWithEmailAndPassword(auth,email,password)
-// .then(result=>{console.log(result.user)})
 
 
-// .catch(error=>{
-// setError(error.message)
-// // console.log(error.message)
-// })
-
-
-
-return
 
 }
 const handleGoogleLogin=()=>{
@@ -78,7 +71,6 @@ signInWithGoogle()
    
 })
 .catch(error=>console.log(error))
-
 }
 const handlebutton=(e)=>{
     e.preventDefault();
@@ -88,8 +80,9 @@ setShowpass(!showpass);
 
 
 
+
     return (
-        <div className="max-w-[500px] mx-auto m-10"><form onSubmit={handleRegister} action=""><fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <div className="max-w-[500px] mx-auto m-10"><form onSubmit={handleRegister} action=""><fieldset className="fieldset bg-white border-base-300 rounded-box w-xs border p-4">
   <legend className="fieldset-legend">Register</legend>
  <label className="label">Name</label>
   <input type="text" className="input" placeholder="Name" />

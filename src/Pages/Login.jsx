@@ -1,7 +1,7 @@
 import React, { use, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Contexts/Context';
-import { auth } from '../Firebase/firebase.init';
+
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,7 +11,10 @@ import { toast } from 'react-toastify';
 const Login = () => {
  const navigate=useNavigate()
  const location=useLocation()
+ console.log(location)
  const emailref=useRef()
+
+
 const {signInUser,signInWithGoogle}=use(AuthContext)
    
 
@@ -20,21 +23,22 @@ const handleLogin=(event)=>{
     const email =event.target.email.value
     const password=event.target.password.value
     
-    signInUser(auth, email,password)
-    .then(result=>{
-        console.log(result.user)
-      
- event.target.reset();
-  toast.success('Log in successful!'); 
-setTimeout(() => navigate(location.state || '/'), 1000);
-      
-    }
+     signInUser(email, password)
+    .then(result => {
+      console.log(result.user);
 
-)
-    .catch(error=>{console.log(error)
-            
-        
+      event.target.reset();
+      toast.success('Log in successful!');
+
+      // Navigate after short delay
+      setTimeout(() => {
+        navigate(location.state || '/');
+      }, 1200);
     })
+    .catch(error => {
+      console.log(error);
+      
+    });
    
 }
 const handleGoogleLogin=()=>{
@@ -48,7 +52,7 @@ signInWithGoogle()
 
 
     return (
-         <div className="max-w-[500px] mx-auto m-10"><form onSubmit={handleLogin}><fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+         <div className="max-w-[500px] mx-auto m-10"><form onSubmit={handleLogin}><fieldset className="fieldset bg-white border-base-300 rounded-box w-xs border p-4">
   <legend className="fieldset-legend">Login</legend>
 
   <label className="label">Email</label>
